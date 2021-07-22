@@ -1,0 +1,318 @@
+﻿-- undefined
+
+-- Token_user Table Create SQL
+CREATE TABLE Token_user
+(
+    `Id_token_users`     INT            NOT NULL    AUTO_INCREMENT, 
+    `value_token_users`  VARCHAR(45)    NULL, 
+    `Date`               DATETIME       NULL, 
+    `Id_users`           INT            NOT NULL, 
+    CONSTRAINT PK_Token_user PRIMARY KEY (Id_token_users)
+);
+
+
+-- User Table Create SQL
+CREATE TABLE User
+(
+    `Id_users`          INT            NOT NULL    AUTO_INCREMENT, 
+    `Name_users`        VARCHAR(45)    NULL, 
+    `Username_users`    VARCHAR(45)    NOT NULL, 
+    `Password_users`    VARCHAR(45)    NOT NULL, 
+    `Email_users`       VARCHAR(45)    NOT NULL, 
+    `Phone_users`       VARCHAR(45)    NULL, 
+    `Image_users`       VARCHAR(45)    NULL, 
+    `Address_users`     VARCHAR(45)    NULL, 
+    `Date_of_birthday`  DATE           NULL, 
+    `Gender`            INT            NULL, 
+    `Id_role`           INT            NOT NULL, 
+    `Status`            INT            NULL, 
+    CONSTRAINT PK_Customer PRIMARY KEY (Id_users)
+);
+
+ALTER TABLE User
+    ADD CONSTRAINT FK_User_Id_users_Token_user_Id_users FOREIGN KEY (Id_users)
+        REFERENCES Token_user (Id_users) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Blog Table Create SQL
+CREATE TABLE Blog
+(
+    `Id_blog`       INT            NOT NULL    AUTO_INCREMENT, 
+    `Title_blog`    VARCHAR(45)    NOT NULL, 
+    `Author_blog`   VARCHAR(45)    NOT NULL, 
+    `Content_blog`  VARCHAR(45)    NULL, 
+    `Date_blog`     DATE           NULL, 
+    `Image_blog`    VARCHAR(45)    NOT NULL, 
+    `Id_view_blog`  INT            NOT NULL, 
+    CONSTRAINT PK_Blog PRIMARY KEY (Id_blog)
+);
+
+ALTER TABLE Blog
+    ADD CONSTRAINT FK_Blog_Author_blog_User_Id_users FOREIGN KEY (Author_blog)
+        REFERENCES User (Id_users) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Game Table Create SQL
+CREATE TABLE Game
+(
+    `Id_game`           INT               NOT NULL    AUTO_INCREMENT, 
+    `Name_game`         VARCHAR(45)       NOT NULL, 
+    `Producter_game`    VARCHAR(45)       NULL, 
+    `Publisher_game`    VARCHAR(45)       NULL, 
+    `ReleaseYear_game`  DATE              NULL, 
+    `id_system`         Int               NOT NULL, 
+    `Description_game`  VARCHAR(500)      NULL, 
+    `Link_video`        VARCHAR(100)      NULL, 
+    `Price`             DECIMAL(18, 0)    NULL, 
+    `Price_fix`         DECIMAL(18, 0)    NULL, 
+    `Rate_game`         FLOAT             NULL, 
+    `Count_sell`        INT               NULL, 
+    `Link_game`         VARCHAR(150)      NULL, 
+    `Id_discount`       INT               NULL, 
+    `count_rate`        INT               NULL, 
+    CONSTRAINT PK_Game PRIMARY KEY (Id_game)
+);
+
+
+-- Bill Table Create SQL
+CREATE TABLE Bill
+(
+    `Id_bill`      INT               NOT NULL    AUTO_INCREMENT, 
+    `Id_users`     INT               NULL, 
+    `Date`         DATETIME          NULL, 
+    `Total_price`  DECIMAL(18, 0)    NULL, 
+    CONSTRAINT PK_Cart PRIMARY KEY (Id_bill)
+);
+
+ALTER TABLE Bill
+    ADD CONSTRAINT FK_Bill_Id_users_User_Id_users FOREIGN KEY (Id_users)
+        REFERENCES User (Id_users) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Comment_blog Table Create SQL
+CREATE TABLE Comment_blog
+(
+    `Id_commnet_blog`       INT             NOT NULL    AUTO_INCREMENT, 
+    `Content_comment_blog`  VARCHAR(150)    NULL, 
+    `Name_user`             VARCHAR(45)     NOT NULL, 
+    `Id_blog`               INT             NOT NULL, 
+    `Id_users`              INT             NULL, 
+    CONSTRAINT PK_Comment_blog PRIMARY KEY (Id_commnet_blog)
+);
+
+ALTER TABLE Comment_blog
+    ADD CONSTRAINT FK_Comment_blog_Id_blog_Blog_Id_blog FOREIGN KEY (Id_blog)
+        REFERENCES Blog (Id_blog) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE Comment_blog
+    ADD CONSTRAINT FK_Comment_blog_Id_users_User_Id_users FOREIGN KEY (Id_users)
+        REFERENCES User (Id_users) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Category Table Create SQL
+CREATE TABLE Category
+(
+    `Id_category`    INT            NOT NULL    AUTO_INCREMENT, 
+    `Name_category`  VARCHAR(45)    NULL, 
+    CONSTRAINT PK_Category PRIMARY KEY (Id_category)
+);
+
+
+-- Comment_game Table Create SQL
+CREATE TABLE Comment_game
+(
+    `Id_comment_game`       INT             NOT NULL    AUTO_INCREMENT, 
+    `Id_game`               INT             NULL, 
+    `Name_user`             VARCHAR(45)     NOT NULL, 
+    `Id_users`              INT             NULL, 
+    `Content_comment_game`  VARCHAR(150)    NULL, 
+    CONSTRAINT PK_Comment_game PRIMARY KEY (Id_comment_game)
+);
+
+ALTER TABLE Comment_game
+    ADD CONSTRAINT FK_Comment_game_Id_game_Game_Id_game FOREIGN KEY (Id_game)
+        REFERENCES Game (Id_game) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE Comment_game
+    ADD CONSTRAINT FK_Comment_game_Id_users_User_Id_users FOREIGN KEY (Id_users)
+        REFERENCES User (Id_users) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Game_Category Table Create SQL
+CREATE TABLE Game_Category
+(
+    `Id_game`      INT    NOT NULL, 
+    `Id_category`  INT    NOT NULL
+);
+
+ALTER TABLE Game_Category
+    ADD CONSTRAINT FK_Game_Category_Id_game_Game_Id_game FOREIGN KEY (Id_game)
+        REFERENCES Game (Id_game) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE Game_Category
+    ADD CONSTRAINT FK_Game_Category_Id_category_Category_Id_category FOREIGN KEY (Id_category)
+        REFERENCES Category (Id_category) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Active_game Table Create SQL
+CREATE TABLE Active_game
+(
+    `Id_users`  INT    NOT NULL, 
+    `Id_game`   INT    NOT NULL, 
+    `Status`    INT    NULL   
+);
+
+ALTER TABLE Active_game
+    ADD CONSTRAINT FK_Active_game_Id_users_User_Id_users FOREIGN KEY (Id_users)
+        REFERENCES User (Id_users) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE Active_game
+    ADD CONSTRAINT FK_Active_game_Id_game_Game_Id_game FOREIGN KEY (Id_game)
+        REFERENCES Game (Id_game) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Image_data Table Create SQL
+CREATE TABLE Image_data
+(
+    `Id_image`    INT            NOT NULL    AUTO_INCREMENT, 
+    `Name_image`  VARCHAR(45)    NULL, 
+    `Id_game`     INT            NOT NULL, 
+    CONSTRAINT PK_Image_data PRIMARY KEY (Id_image)
+);
+
+ALTER TABLE Image_data
+    ADD CONSTRAINT FK_Image_data_Id_game_Game_Id_game FOREIGN KEY (Id_game)
+        REFERENCES Game (Id_game) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Role Table Create SQL
+CREATE TABLE Role
+(
+    `Id_role`    INT            NOT NULL    AUTO_INCREMENT, 
+    `Name_role`  VARCHAR(45)    NULL, 
+    CONSTRAINT PK_Role PRIMARY KEY (Id_role)
+);
+
+ALTER TABLE Role
+    ADD CONSTRAINT FK_Role_Id_role_User_Id_role FOREIGN KEY (Id_role)
+        REFERENCES User (Id_role) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Reply_comment_blog Table Create SQL
+CREATE TABLE Reply_comment_blog
+(
+    `Id_reply_comment_blog`  INT             NOT NULL    AUTO_INCREMENT, 
+    `Id_commnet_blog`        INT             NOT NULL, 
+    `Id_users`               INT             NOT NULL, 
+    `Content_comment`        VARCHAR(150)    NULL, 
+    CONSTRAINT PK_Reply_comment_blog PRIMARY KEY (Id_reply_comment_blog)
+);
+
+ALTER TABLE Reply_comment_blog
+    ADD CONSTRAINT FK_Reply_comment_blog_Id_commnet_blog_Comment_blog_Id_commnet_blog FOREIGN KEY (Id_commnet_blog)
+        REFERENCES Comment_blog (Id_commnet_blog) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Reply_comment_game Table Create SQL
+CREATE TABLE Reply_comment_game
+(
+    `Id_reply_comment_game`  INT             NOT NULL    AUTO_INCREMENT, 
+    `Id_comment_game`        INT             NULL, 
+    `Id_users`               INT             NULL, 
+    `Content_comment`        VARCHAR(150)    NULL, 
+    CONSTRAINT PK_Reply_comment_game PRIMARY KEY (Id_reply_comment_game)
+);
+
+ALTER TABLE Reply_comment_game
+    ADD CONSTRAINT FK_Reply_comment_game_Id_comment_game_Comment_game_Id_comment_game FOREIGN KEY (Id_comment_game)
+        REFERENCES Comment_game (Id_comment_game) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Bill_detail Table Create SQL
+CREATE TABLE Bill_detail
+(
+    `Id_bill_detail`  INT               NOT NULL    AUTO_INCREMENT, 
+    `Id_bill`         INT               NULL, 
+    `Id_game`         INT               NULL, 
+    `Price`           DECIMAL(18, 0)    NULL, 
+    CONSTRAINT PK_Bill_detail PRIMARY KEY (Id_bill_detail)
+);
+
+ALTER TABLE Bill_detail
+    ADD CONSTRAINT FK_Bill_detail_Id_bill_Bill_Id_bill FOREIGN KEY (Id_bill)
+        REFERENCES Bill (Id_bill) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE Bill_detail
+    ADD CONSTRAINT FK_Bill_detail_Id_game_Game_Id_game FOREIGN KEY (Id_game)
+        REFERENCES Game (Id_game) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- System Table Create SQL
+CREATE TABLE System
+(
+    `Dowload_system`  INT         NOT NULL, 
+    `views_system`    INT         NOT NULL, 
+    `Date`            DATETIME    NOT NULL
+);
+
+
+-- View_blog Table Create SQL
+CREATE TABLE View_blog
+(
+    `Id_view_blog`  INT     NOT NULL    AUTO_INCREMENT, 
+    `Date`          DATE    NULL, 
+    `count_view`    INT     NULL, 
+    CONSTRAINT PK_View_blog PRIMARY KEY (Id_view_blog)
+);
+
+ALTER TABLE View_blog
+    ADD CONSTRAINT FK_View_blog_Id_view_blog_Blog_Id_view_blog FOREIGN KEY (Id_view_blog)
+        REFERENCES Blog (Id_view_blog) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- System_requirements Table Create SQL
+CREATE TABLE System_requirements
+(
+    `Id_system_rerequirements`  INT            NOT NULL    AUTO_INCREMENT, 
+    `Processor`                 VARCHAR(45)    NULL, 
+    `RAM`                       VARCHAR(45)    NULL, 
+    `VGA`                       VARCHAR(45)    NULL, 
+    `Storage`                   VARCHAR(45)    NULL, 
+    CONSTRAINT PK_System_requirements PRIMARY KEY (Id_system_rerequirements)
+);
+
+ALTER TABLE System_requirements
+    ADD CONSTRAINT FK_System_requirements_Id_system_rerequirements_Game_id_system FOREIGN KEY (Id_system_rerequirements)
+        REFERENCES Game (id_system) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Discount Table Create SQL
+CREATE TABLE Discount
+(
+    `Id_discount`  INT     NOT NULL    AUTO_INCREMENT, 
+    `Date_start`   DATE    NULL, 
+    `Date_end`     DATE    NULL, 
+    `Value`        INT     NULL, 
+    `Status`       INT     NULL, 
+    CONSTRAINT PK_Discount PRIMARY KEY (Id_discount)
+);
+
+ALTER TABLE Discount
+    ADD CONSTRAINT FK_Discount_Id_discount_Game_Id_discount FOREIGN KEY (Id_discount)
+        REFERENCES Game (Id_discount) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Slide_show Table Create SQL
+CREATE TABLE Slide_show
+(
+    `Id_slide_show`  INT            NOT NULL    AUTO_INCREMENT, 
+    `image`          VARCHAR(45)    NULL, 
+    `Id_game`        INT            NULL, 
+    CONSTRAINT PK_Slide_show PRIMARY KEY (Id_slide_show)
+);
+
+ALTER TABLE Slide_show
+    ADD CONSTRAINT FK_Slide_show_Id_game_Game_Id_game FOREIGN KEY (Id_game)
+        REFERENCES Game (Id_game) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+

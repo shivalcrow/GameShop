@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- author Phat Dat 
+	 Detailed Info of a game
+-->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link href="../../css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="../../css/style1.css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <title>Home</title>
+    <style id="dynamic-css"></style>
+    <style type="text/css">
+        .preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            text-align: center;
+            z-index: 6001;
+        }
+
+        .preloader:after {
+            content: "";
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .sk-cube-grid {
+            width: 3.857rem;
+            height: 3.857rem;
+            margin: 0 auto;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .sk-cube-grid .sk-cube {
+            width: 33%;
+            height: 33%;
+            background-color: #333;
+            float: left;
+            -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+            animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+        }
+
+        .sk-cube-grid .sk-cube1 {
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+
+        .sk-cube-grid .sk-cube2 {
+            -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+        }
+
+        .sk-cube-grid .sk-cube3 {
+            -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s;
+        }
+
+        .sk-cube-grid .sk-cube4 {
+            -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s;
+        }
+
+        .sk-cube-grid .sk-cube5 {
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+
+        .sk-cube-grid .sk-cube6 {
+            -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+        }
+
+        .sk-cube-grid .sk-cube7 {
+            -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+        }
+
+        .sk-cube-grid .sk-cube8 {
+            -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s;
+        }
+
+        .sk-cube-grid .sk-cube9 {
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+
+        @-webkit-keyframes sk-cubeGridScaleDelay {
+
+            0%,
+            70%,
+            100% {
+                -webkit-transform: scale3D(1, 1, 1);
+                transform: scale3D(1, 1, 1);
+            }
+
+            35% {
+                -webkit-transform: scale3D(0, 0, 1);
+                transform: scale3D(0, 0, 1);
+            }
+        }
+
+        @keyframes sk-cubeGridScaleDelay {
+
+            0%,
+            70%,
+            100% {
+                -webkit-transform: scale3D(1, 1, 1);
+                transform: scale3D(1, 1, 1);
+            }
+
+            35% {
+                -webkit-transform: scale3D(0, 0, 1);
+                transform: scale3D(0, 0, 1);
+            }
+        }
+
+    </style>
+</head>
+
+<body class="page-color-style-1 page-style-1">
+
+      <div th:insert="fragments/frShop :: header"></div>
+
+    <div class="main-content">
+		
+        <section class="section">
+            <div class="empty-lg-140 empty-md-100 empty-sm-90 empty-xs-60"></div>
+            <div class="custome-container">
+                <div class="row vertical-wrap item-animation scroll-type-1">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="main-caption text-center item-padd-30">
+                            <h2 class="h1 title main-col" th:text="${game.nameGame}"></h2>
+                            <div class="empty-sm-10 empty-xs-10"></div>
+                            <div class="simple-text md simple-sub-text">
+                                <p th:text="${game.descriptionGame}"></p>
+                            </div>
+                            <div class="empty-sm-20 empty-xs-20"></div>
+                            <div class="simple-text">
+								<p>Price:</p>
+                                <p style="display: inline-block;" th:text="${'- ' + game.discount.value + ' %'}"></p>
+								<p style="display: inline-block; margin-left: 20px;" th:text="${game.priceFix + ' VND'}"></p>
+								<p style="display: inline-block; margin-left: 20px;" ><strike th:text="${game.price + ' VND'}"></strike></p>
+                            </div>
+							<div class="empty-sm-15 empty-xs-15"></div>
+							<!-- Quantity button -->
+							<div class="quantity buttons_added">
+								<input type="button" value="-" class="minus">
+								<input type="number" step="1" min="1" max="" name="quantity" value="1" 
+								title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+								<input type="button" value="+" class="plus">
+							</div>
+							<!-- End Quantity button -->
+                            <div class="empty-sm-45  empty-xs-45"></div>
+                            <a href="#" class="page-button button-style-2"><span class="bg"
+                                    style="background-image: url(../img/home-1/button_img_2.jpg)"></span><span
+                                    class="txt">Add to Cart</span></a>
+							<a href="#" class="page-button button-style-2" style="margin-left: 20px;"><span class="bg"
+                                    style="background-image: url(../img/home-1/button_img_2.jpg)"></span><span
+                                    class="txt">Buy Now</span></a>
+                        </div>
+                        <div class="empty-lg-0 empty-md-0 empty-sm-60 empty-xs-60"></div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12" >
+                        <div class="row" th:each="image : ${images}">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="simple-item-style-2 simple-item">
+                                    <span class="page-span-3 page-span"></span>
+                                    <img th:src="@{'../' + *{image.nameImage}}" alt="" class="resp-img">
+                                </div>
+                                <div class="empty-sm-30 empty-xs-30"></div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="simple-item-style-2 simple-item">
+                                    <span class="page-span-1 page-span type-2"></span>
+                                    <img th:src="@{'../' + *{image.nameImage}}" alt="" class="resp-img">
+                                </div>
+                                <div class="empty-sm-30 empty-xs-30"></div>
+                            </div>
+                        </div>
+                        <div class="simple-item-style-2 simple-item">
+                            <span class="page-span-4 page-span"></span>
+                            <span class="page-span-2 page-span type-2"></span>
+							<video th:src="@{*{game.linkVideo}}" controls class="resp-img">
+							</video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="empty-lg-140 empty-md-100 empty-sm-90 empty-xs-60"></div>
+        </section>
+
+    </div>
+
+    <div th:insert="fragments/frShop :: footer"></div>
+
+  
+    
+	
+	<!-- added -->
+	<div th:insert="fragments/frShop :: popupLogout"></div>
+	<div th:insert="fragments/frShop :: popupForgot"></div>
+	<div th:insert="fragments/frShop :: popupRegister"></div>
+
+
+<div th:insert="fragments/frShop :: popupLogin"></div>  
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+    <script src="../../js/jquery-ui.min.js"></script>
+    <script src="../../js/all.js"></script>
+    <script src="../../js/jscolor.min.js"></script>
+    <script src="../../js/jquery.knob.js"></script>
+    <script src="../../js/jquery.throttle.js"></script>
+    <script src="../../js/jquery.classycountdown.js"></script>
+    <script src="../../js/jarallax.js"></script>
+    <script src="../../js/color.picker.js"></script>
+	
+	
+	<script src="../../js/script.js"></script>	
+	<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+</body>
+
+</html>

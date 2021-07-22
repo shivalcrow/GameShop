@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+<meta name="author" content="Coderthemes">
+
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+<title>Megalodon</title>
+
+
+<!-- Custom box css -->
+<link href="../plugins/custombox/css/custombox.min.css" rel="stylesheet">
+<!-- App css -->
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="../assets/css/core.css" rel="stylesheet" type="text/css" />
+<link href="../assets/css/components.css" rel="stylesheet"
+	type="text/css" />
+<link href="../assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="../assets/css/pages.css" rel="stylesheet" type="text/css" />
+<link href="../assets/css/menu.css" rel="stylesheet" type="text/css" />
+<link href="../assets/css/responsive.css" rel="stylesheet"
+	type="text/css" />
+<link rel="stylesheet" href="../plugins/switchery/switchery.min.css">
+
+<!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+<script src="../assets/js/modernizr.min.js"></script>
+
+</head>
+
+
+<body>
+
+
+	<!-- Navigation Bar-->
+	<div th:insert="fragments/frAdmin :: header"></div>
+	<!-- End Navigation Bar-->
+
+
+	<div class="wrapper">
+		<div class="container">
+
+
+			<!-- List of Game -->
+
+
+
+
+			<div class="row">
+				<div class="col-sm-12">
+					<label style="font-size: 70px; color: lightblue;">List of
+						Game</label>
+
+					<div class="panel">
+
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="m-b-30">
+										<a href="/admin/addgame" id="addToTable"
+											class="btn btn-success waves-effect waves-light">Add <i
+											class="mdi mdi-plus-circle-outline"></i></a>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="m-b-30">
+
+										<input type="text" id="search-input"
+											class="form-control product-search"
+											placeholder="Search by name of game..." v-model="search">
+
+									</div>
+								</div>
+							</div>
+							<div class="row"></div>
+
+							<div class="">
+								<table class="table table-striped add-edit-table table-bordered"
+									id="datatable-editable">
+									<thead>
+										<tr>
+											<th>Game Name</th>
+											<th>Producter</th>
+											<th>Publisher</th>
+											<th>Release Year</th>
+											<th>Price</th>
+											<th>Rate Game</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="gradeX" v-for="g in filteredGame">
+											<td>{{g.nameGame}}</td>
+											<td>{{g.producterGame}}</td>
+											<td>{{g.publisherGame}}</td>
+											<td>{{g.releaseYearGame}}</td>
+											<td>{{g.price}} VND</td>
+											<td>{{g.rateGame}}</td>
+											<td class="actions"><a
+												v-bind:href="'/editgame/' + g.idGame"><i
+													class="fa fa-pencil"></i></a> 
+											
+												<a v-on:click="deleteGame(g)"><i class="fa fa-trash-o"></i></a>
+												
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- end: page -->
+
+					</div>
+					<!-- end Panel -->
+
+				</div>
+			</div>
+			<!-- Footer -->
+			<footer class="footer text-right">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 text-center">© 2016 - 2018 Zircos.</div>
+					</div>
+				</div>
+			</footer>
+			<!-- End Footer -->
+
+		</div>
+	</div>
+	<!-- jQuery  -->
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/detect.js"></script>
+	<script src="../assets/js/fastclick.js"></script>
+	<script src="../assets/js/jquery.blockUI.js"></script>
+	<script src="../assets/js/waves.js"></script>
+	<script src="../assets/js/jquery.slimscroll.js"></script>
+	<script src="../assets/js/jquery.scrollTo.min.js"></script>
+	<script src="../plugins/switchery/switchery.min.js"></script>
+
+	<!-- Counter js  -->
+	<script src="../plugins/waypoints/jquery.waypoints.min.js"></script>
+	<script src="../plugins/counterup/jquery.counterup.min.js"></script>
+
+	<!-- App js -->
+	<script src="../assets/js/jquery.core.js"></script>
+	<script src="../assets/js/jquery.app.js"></script>
+	<!--modal  -->
+	<script src="../plugins/custombox/js/custombox.min.js"></script>
+	<script src="../plugins/custombox/js/legacy.min.js"></script>
+	</body>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://vuejs.org/js/vue.js"></script>
+	<script>
+    var app = new Vue({
+        el: '.wrapper',
+        data() {
+            return {
+                game: [],
+                search: '',
+            }
+        },
+        mounted() {
+            this.fetchGame();
+        },
+        methods: {
+            fetchGame: function () {
+                axios.get("http://localhost:8080/api/game").then(response => (
+                    this.game = response.data))
+            },
+            deleteGame: async function (id) {
+                await axios
+                    .delete("http://localhost:8080/api/deletegame/" + id.idGame);
+                this.fetchGame();
+            },
+        },
+        computed: {
+			filteredGame: function (){
+				return this.game.filter((g)=>{
+					return g.nameGame.toLowerCase().match(this.search.toLowerCase());
+					})	
+			}	
+        }, 
+
+    })
+    </script>
+</html>

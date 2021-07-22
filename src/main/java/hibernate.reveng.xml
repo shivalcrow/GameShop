@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="megalodondb" match-name="active_game"/>
+  <table-filter match-catalog="megalodondb" match-name="bill"/>
+  <table-filter match-catalog="megalodondb" match-name="bill_detail"/>
+  <table-filter match-catalog="megalodondb" match-name="blog"/>
+  <table-filter match-catalog="megalodondb" match-name="category"/>
+  <table-filter match-catalog="megalodondb" match-name="comment_blog"/>
+  <table-filter match-catalog="megalodondb" match-name="comment_game"/>
+  <table-filter match-catalog="megalodondb" match-name="discount"/>
+  <table-filter match-catalog="megalodondb" match-name="game_category"/>
+  <table-filter match-catalog="megalodondb" match-name="games"/>
+  <table-filter match-catalog="megalodondb" match-name="image_data"/>
+  <table-filter match-catalog="megalodondb" match-name="reply_comment_blog"/>
+  <table-filter match-catalog="megalodondb" match-name="reply_comment_game"/>
+  <table-filter match-catalog="megalodondb" match-name="role"/>
+  <table-filter match-catalog="megalodondb" match-name="slide_show"/>
+  <table-filter match-catalog="megalodondb" match-name="system"/>
+  <table-filter match-catalog="megalodondb" match-name="system_requirements"/>
+  <table-filter match-catalog="megalodondb" match-name="token_user"/>
+  <table-filter match-catalog="megalodondb" match-name="users"/>
+  <table-filter match-catalog="megalodondb" match-name="view_blog"/>
+</hibernate-reverse-engineering>

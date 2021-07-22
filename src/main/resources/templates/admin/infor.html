@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+        <meta name="author" content="Coderthemes">
+		<link rel="stylesheet"
+			  href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="shortcut icon" href="../assets/images/favicon.ico">
+		<!-- Custom box css -->
+        <link href="../plugins/custombox/css/custombox.min.css" rel="stylesheet">
+        <title>Zircos - Responsive Admin Dashboard Template</title>
+
+        <!-- App css -->
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/core.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/components.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/pages.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/menu.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/responsive.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="../plugins/switchery/switchery.min.css">
+
+        <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../assets/js/modernizr.min.js"></script>
+
+    </head>
+
+
+    <body>
+
+
+        <!-- Navigation Bar-->
+        <div th:insert="fragments/frAdmin :: header"></div>
+        <!-- End Navigation Bar-->
+
+
+        <div class="wrapper">
+            <div class="container">
+
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="btn-group pull-right">
+                                <ol class="breadcrumb hide-phone p-0 m-0">
+                                    <li>
+                                        <a href="#">Zircos</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Real Estate</a>
+                                    </li>
+                                    <li class="active">
+                                        Agent Profile
+                                    </li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Your Profile</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title end breadcrumb -->
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4">
+                                    <div class="text-center card-box">
+                                        <div class="member-card">
+                                            <div class="thumb-xl member-thumb m-b-10 center-block">
+                                                <img th:src="@{'~/getimguser/'+${userInfo}}" class="img-circle img-thumbnail" alt="profile-image">
+                                                <i class="mdi mdi-star-circle member-star text-success" title="verified user"></i>
+                                            </div>
+
+                                            <div class="">
+                                                <h4 class="m-b-5" th:text="${userInfo}"></h4>
+                                            
+                                            </div>
+
+                                            <a href="#custom-modal" class="btn btn-success btn-sm w-sm waves-effect m-t-10 waves-light" data-animation="fadein" data-plugin="custommodal"
+                                                data-overlaySpeed="200" data-overlayColor="#36404a">Change avatar</a>
+                                            <a href="#custom-modal1" class="btn btn-danger btn-sm w-sm waves-effect m-t-10 waves-light" data-animation="fadein" data-plugin="custommodal"
+                                            data-overlaySpeed="200" data-overlayColor="#36404a">Change Password</a>
+                                            <hr/>
+
+                                            <div class="text-left">
+                                                <p class="text-muted font-13"><strong>Full Name :</strong> <span class="m-l-15" th:text="${useredit.nameUsers}"></span></p>
+
+                                                <p class="text-muted font-13"><strong>Mobile :</strong><span class="m-l-15" th:text="${useredit.phoneUsers}"></span></p>
+
+                                                <p class="text-muted font-13"><strong>Email :</strong> <span class="m-l-15" th:text="${useredit.emailUsers}"></span></p>
+
+                                                <p class="text-muted font-13"><strong>Birthday :</strong> <span class="m-l-15" th:text="${useredit.dateOfBirthday}"></span></p>
+                                                
+                                                <p class="text-muted font-13"><strong>Location :</strong> <span class="m-l-15" th:text="${useredit.addressUsers}"></span></p>
+                                            </div>
+
+                                            <ul class="social-links list-inline m-t-30">
+                                                <li>
+                                                    <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
+                                                </li>
+                                            </ul>
+
+                                        </div> <!-- end member-card -->
+
+                                    </div> <!-- end card-box -->
+
+                                </div> <!-- end col -->
+
+                                <div class="col-md-8 col-lg-9">
+                                    <h4 class="m-t-0 text-uppercase">Basic Information</h4>
+                                    <div class="border m-b-30"></div>
+
+                                    <div class="row">
+                            <form method="post" th:action="@{/saveinfor}" th:object="${useredit}" data-parsley-validate novalidate>
+                
+                                <div class="form-group">
+                                    <label for="userName">Full Name<span class="text-danger">*</span></label>
+                                    <input type="text" name="usernameUsers" parsley-trigger="change" required
+                                        placeholder="Enter Username" class="form-control" id="userName"
+                                        th:field="*{nameUsers}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailAddress">BirthDay<span class="text-danger">*</span></label>
+
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" name="dateOfBirthday"
+                                            th:field="*{dateOfBirthday}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Phone">Phone<span class="text-danger">*</span></label>
+                                        <input type="text" name="phoneUsers" parsley-trigger="change" required
+                                            placeholder="Enter Your Phone" class="form-control" id="Phone"
+                                            th:field="*{phoneUsers}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passWord2">Email<span class="text-danger">*</span></label>
+                                        <input type="email" name="email_users" parsley-trigger="change" required
+                                            placeholder="Enter Your Email" class="form-control" id="Email"
+                                            th:field="*{emailUsers}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Address">Address<span class="text-danger">*</span></label>
+                                        <input type="text" name="addressUsers" parsley-trigger="change" required
+                                            placeholder="Enter Address" class="form-control" id="Address"
+                                            th:field="*{addressUsers}">
+                                    </div>
+
+                                    <div class="form-group text-right m-b-0">
+                                        <input class="btn btn-primary " type="submit" id="save" value="Save">
+                                    </div>
+                                </div>
+                            </form>
+                        </div> <!--end row -->
+
+                                 
+
+                                </div>
+                                <!-- end col -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End row -->
+
+
+
+                <!-- Footer -->
+                <footer class="footer text-right">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                © 2016 - 2018 Zircos.
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End Footer -->
+
+            </div> <!-- end container -->
+        </div>
+        <!-- end wrapper -->
+		<!-- Modal -->
+        <div id="custom-modal" class="modal-demo">
+            <button type="button" class="close" onclick="Custombox.close();">
+                <span>&times;</span><span class="sr-only">Close</span>
+            </button>
+            <h4 class="custom-modal-title">Change Avatar</h4>
+            <div class="custom-modal-text">
+                <form method="Post" th:action="@{/saveavatar}" enctype="multipart/form-data">
+                   <div class="p-20">
+                       <div class="form-group clearfix">
+                           <h4 class="header-title m-t-0">Please choose Images
+                               Upload</h4>   
+                           <div class="col-sm-12 padding-left-0 padding-right-0">
+                               <input  type="file" name="file">
+                           </div>
+                           <div class="col-sm-12 padding-left-0 padding-right-0">
+                               <img class="img-responsive img-rounded" width="200" />
+                           </div>
+                       </div>
+                       <div class="form-group pull-right clearfix">
+                           <div class="col-sm-12 padding-left-0 padding-right-0">
+                               <button type="submit"
+                                   class="btn btn-teal btn-rounded waves-light waves-effect w-md m-b-5">
+                                   Save</button>
+                           </div>
+                       </div>
+                   </div>
+               </form>
+            </div>
+        </div>
+        <div id="custom-modal1" class="modal-demo">
+            <button type="button" class="close" onclick="Custombox.close();">
+                <span>&times;</span><span class="sr-only">Close</span>
+            </button>
+            <h4 class="custom-modal-title">Change Password</h4>
+            <div class="custom-modal-title">
+                <form method="Post" th:action="@{/savepassword}">
+                   <div class="form-group">
+                      <label for="userName">Your Old Password<span class="text-danger">*</span></label>
+                      <input type="text" name="oldpass" parsley-trigger="change" required
+                          placeholder="Enter Old Password" class="form-control" id="userName">
+                   </div>
+                   <div class="form-group">
+                      <label for="userName">New Password<span class="text-danger">*</span></label>
+                      <input type="text" name="newpasswordUsers" parsley-trigger="change" required
+                          placeholder="Enter New Password" class="form-control" id="userName"
+                          >
+                   </div>
+                   <div class="form-group pull-right clearfix">
+                       <div class="col-sm-12 padding-left-0 padding-right-0">
+                           <button type="submit"
+                               class="btn btn-teal btn-rounded waves-light waves-effect w-md m-b-5">
+                               Save</button>
+                       </div>
+                   </div>
+               </form>
+            </div>
+        </div>
+        <!-- POP UP -->
+        <div class="popup index-popup-login" data-rel="3">
+		<div class="popup-wrap popup-layer">
+			<div class="empty-sm-0 empty-xs-15"></div>
+			<div class="container size-1">
+				<div class="popup-inner">
+					<div class="close-popup type-2">
+						<svg xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+							viewBox="0 0 21.9 21.9" enable-background="new 0 0 21.9 21.9"
+							width="14px" height="14px">
+            <path
+								d="M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0  c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4  s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3  s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7  s-0.1-0.5-0.3-0.7L14.1,11.3z"
+								fill="#484848" />
+            </svg>
+					</div>
+		<div class="main-caption text-center color-type-2">
+				<h4 style="color: red;"  class="h4 tt" th:utext="${message}"></h4>
+			<script type="text/javascript">
+				var input = document.querySelector('#input-message');
+				var message="[[${message}]]";
+				if(message){
+					document.body.classList.add('overflow');
+					var popup = document.querySelector('.index-popup-login');
+					popup.classList.add('active');
+				}
+				</script>
+			</div>
+			</div>
+		</div>
+		</div>
+		</div>
+		<!-- pop up -->
+		<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/jscolor.min.js"></script>
+		<script src="js/jquery.knob.js"></script>
+		<script src="js/jquery.throttle.js"></script>
+		<script src="js/jquery.classycountdown.js"></script>
+		<script src="js/jarallax.js"></script>
+		<script src="js/all.js"></script>
+		<script src="js/color.picker.js"></script>
+        <!-- jQuery  -->
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/detect.js"></script>
+        <script src="../assets/js/fastclick.js"></script>
+        <script src="../assets/js/jquery.blockUI.js"></script>
+        <script src="../assets/js/waves.js"></script>
+        <script src="../assets/js/jquery.slimscroll.js"></script>
+        <script src="../assets/js/jquery.scrollTo.min.js"></script>
+        <script src="../plugins/switchery/switchery.min.js"></script>
+
+        <!-- App js -->
+        <script src="../assets/js/jquery.core.js"></script>
+        <script src="../assets/js/jquery.app.js"></script>
+        
+		<!-- Modal-Effect -->
+        <script src="../plugins/custombox/js/custombox.min.js"></script>
+        <script src="../plugins/custombox/js/legacy.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,123 @@
+<header id="topnav" xmlns:th="http://www.thymeleaf.org" th:fragment="headeradmin">
+            <div class="topbar-main">
+                <div class="container">
+
+                    <!-- Logo container-->
+                    <div class="logo">
+                        <!-- Text Logo -->
+                        <!--<a href="index.html" class="logo">-->
+                            <!--Zircos-->
+                        <!--</a>-->
+                        <!-- Image Logo -->
+                        <a href="/admin" class="logo">
+                            <img th:src="@{~/assets/images/logo.png}" alt="Megalodon" height="40px" width="70px" >
+                        </a>
+
+                    </div>
+                    <!-- End Logo container-->
+
+
+                    <div class="menu-extras">
+
+                        <ul class="nav navbar-nav navbar-right pull-right">
+                            <li class="dropdown navbar-c-items">
+                                <a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true"><img th:src="@{'~/getimguser/'+${userInfo}}" alt="user-img" class="img-circle"> </a>
+                                <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
+                                    <li class="text-center">
+                                        <h5 th:text="'Hi, '+${userInfo}"></h5>
+                                    </li>
+                                    <li><a href="/admin/infor"><i class="ti-user m-r-5"></i> Profile</a></li>
+                                    <li><a th:href="@{/logout}" href="javascript:void(0)"><i class="ti-power-off m-r-5"></i> Logout</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                        <div class="menu-item">
+                            <!-- Mobile menu toggle-->
+                            <a class="navbar-toggle">
+                                <div class="lines">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </a>
+                            <!-- End mobile menu toggle-->
+                        </div>
+                    </div>
+                    <!-- end menu-extras -->
+
+                </div> <!-- end container -->
+            </div>
+            <!-- end topbar-main -->
+
+            <div class="navbar-custom">
+                <div class="container">
+                    <div id="navigation">
+                        <!-- Navigation Menu-->
+                        <ul class="navigation-menu">
+
+                            <li class="has-submenu">
+                                <a href="/admin"><i class="mdi mdi-view-dashboard"></i>Dashboard</a>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="mdi mdi-layers"></i>Game Manager</a>
+                                <ul class="submenu megamenu">
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <span>Game</span>
+                                            </li>
+                                            <li><a href="/admin/listgame">List Game</a></li>
+                                            <li><a href="/admin/addgame">Add Game</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="mdi mdi-layers"></i>User Manager</a>
+                                <ul class="submenu megamenu">
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <span>User</span>
+                                            </li>
+                                            <li><a href="/admin/listcustomers">List Customer</a></li>
+                                            <li><a href="/admin/listusers">Users</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="mdi mdi-layers"></i>Blog Manager</a>
+                                <ul class="submenu megamenu">
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <span>Blog</span>
+                                            </li>
+                                            <li><a href="#">Dashboard Blog</a></li>
+                                            <li><a th:href="@{/admin/addblog}">Add Blog</a></li>
+                                             <li><a th:href="@{/admin/listblog}">List Blogs</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="/admin/slide"><i class="mdi mdi-layers"></i>SlideShow</a>
+                               
+                            </li>
+                            <li class="has-submenu">
+                                <a href="/admin/bill"><i class="mdi mdi-layers"></i>Bill</a>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- End navigation menu -->
+                    </div> <!-- end #navigation -->
+                </div> <!-- end container -->
+            </div> <!-- end navbar-custom -->
+        </header>
+        <!-- End Navigation Bar-->
+        

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+<meta name="author" content="Coderthemes">
+<link href="../plugins/custombox/css/custombox.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>Megalodon</title>
+
+<!-- App css -->
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="../assets/css/core.css" rel="stylesheet" type="text/css" />
+<link href="../assets/css/components.css" rel="stylesheet"
+	type="text/css" />
+<link href="../assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="../assets/css/pages.css" rel="stylesheet" type="text/css" />
+<link href="../assets/css/menu.css" rel="stylesheet" type="text/css" />
+<link href="../assets/css/responsive.css" rel="stylesheet"
+	type="text/css" />
+<link rel="stylesheet" href="../plugins/switchery/switchery.min.css">
+<script src="../plugins/custombox/js/custombox.min.js"></script>
+<script src="../plugins/custombox/js/legacy.min.js"></script>
+<!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+<script src="../assets/js/modernizr.min.js"></script>
+
+</head>
+
+
+<body>
+
+
+	<!-- Navigation Bar-->
+	<div th:insert="fragments/frAdmin :: header"></div>
+	<!-- End Navigation Bar-->
+
+
+	<div class="wrapper">
+		<div class="container">
+
+			<!-- Page-Title -->
+			<div class="row m-t-20 m-b-20">
+				<div class="col-sm-6 col-sm-offset-3">
+					<div class="form-group search-box">
+
+						<input type="text" id="search-input"
+							class="form-control product-search" placeholder="Search here..."
+							v-model="search"></i></input>
+
+
+					</div>
+				</div>
+			</div>
+			<script>
+$(document).ready(function(){
+  $("#search-input").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tablebill tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+			
+			<!-- database-table -->
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card-box table-responsive">
+						<h4 class="m-t-0 header-title">
+							<b>List Bills</b>
+						</h4>
+						<table id="datatable" class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>User</th>
+									<th>Date</th>
+									<th>Total price</th>
+									<th>View</th>
+								</tr>
+							</thead>
+							<tbody id="tablebill" th:each="bill : ${listbill}">
+								<tr>
+									<td th:text="${bill.idBill}"></td>
+									<td th:text="${bill.users.nameUsers}"></td>
+									<td th:text="${#dates.format(bill.date,'dd-MM-yyyy hh:mm')}"></td>
+									<td th:text="${bill.totalPrice}"></td>
+									<td><a th:href="'#custom-modal'+${bill.idBill}"
+										class="btn btn-primary waves-effect waves-light m-r-5 m-b-10"
+										data-animation="fadein" data-plugin="custommodal"
+										data-overlaySpeed="200" data-overlayColor="#36404a">View Detail Bill</a>
+										<div th:id="'custom-modal'+${bill.idBill}" class="modal-demo">
+											<button type="button" class="close"
+												onclick="Custombox.close();">
+												<span>&times;</span><span class="sr-only">Close</span>
+											</button>
+											<h4 class="custom-modal-title">Detail Bill</h4>
+											<div class="custom-modal-text">
+												<div class="panel panel-color panel-success">
+													<!-- Default panel contents -->
+													<!-- Table -->
+													<table class="table">
+														<thead>
+															<tr>
+																
+																<th>Bill</th>
+																<th>Game</th>
+																<th>Price Game</th>
+															</tr>
+														</thead>
+														<tbody th:each="billdt: ${bill.billDetails}">
+															<tr>
+																
+																<td th:text="${billdt.bill.idBill}"></td>
+																<td th:text="${billdt.games.nameGame}"></td>
+																<td th:text="${billdt.games.price}"></td>
+															</tr>
+															
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div></td>
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+
+
+			<!-- Footer -->
+			<footer class="footer text-right">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 text-center">© 2016 - 2018 Zircos.</div>
+					</div>
+				</div>
+			</footer>
+			<!-- End Footer -->
+
+		</div>
+	</div>
+	<!-- jQuery  -->
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/detect.js"></script>
+	<script src="../assets/js/fastclick.js"></script>
+	<script src="../assets/js/jquery.blockUI.js"></script>
+	<script src="../assets/js/waves.js"></script>
+	<script src="../assets/js/jquery.slimscroll.js"></script>
+	<script src="../assets/js/jquery.scrollTo.min.js"></script>
+	<script src="../plugins/switchery/switchery.min.js"></script>
+
+	<!-- Counter js  -->
+	<script src="../plugins/waypoints/jquery.waypoints.min.js"></script>
+	<script src="../plugins/counterup/jquery.counterup.min.js"></script>
+
+	<!-- App js -->
+	<script src="../assets/js/jquery.core.js"></script>
+	<script src="../assets/js/jquery.app.js"></script>
+
+</body>
+
+
+</html>
