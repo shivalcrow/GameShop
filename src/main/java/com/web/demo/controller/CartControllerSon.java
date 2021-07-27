@@ -8,6 +8,7 @@ import java.security.Principal;
  * @author NguyenHuuSon
  */
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -37,11 +38,13 @@ import com.web.demo.config.PaypalUtils;
 import com.web.demo.config.WebUtils;
 import com.web.demo.dto.CartDTOSon;
 import com.web.demo.entity.Bill;
+import com.web.demo.entity.Category;
 import com.web.demo.entity.Games;
 import com.web.demo.entity.Users;
 import com.web.demo.service.AdminGameServiceAn;
 import com.web.demo.service.BillDetailServiceSon;
 import com.web.demo.service.BillServiceSon;
+import com.web.demo.service.CategoryService;
 import com.web.demo.service.PayPalService;
 import com.web.demo.service.UserServiceSon;
 @Controller
@@ -56,6 +59,8 @@ public class CartControllerSon {
 	BillServiceSon billservice;
 	@Autowired
 	BillDetailServiceSon billdetailservice;
+	@Autowired
+	CategoryService cateservice;
 	@GetMapping("/cart")
 	public String indexcart(Model model,Users user,Principal principal,HttpSession session) {
 		model.addAttribute("user", user);
@@ -69,6 +74,8 @@ public class CartControllerSon {
 			System.out.println(session.getAttribute("userinfoname") + "a" + session.getAttribute("userinfoemail"));
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
+			List<Category> listcate = cateservice.findAll();
+			model.addAttribute("listcate", listcate);
 		}
 		return "shop/checkout-1";
 	}
@@ -92,6 +99,7 @@ public class CartControllerSon {
 			Cartitems.put(id, cart);
 			
 		}
+		
 		session.setAttribute("mycartitem", Cartitems);
 		session.setAttribute("mycarttotal",totalPrice(Cartitems));
 		session.setAttribute("mycartnum", Cartitems.size());
@@ -173,6 +181,7 @@ public class CartControllerSon {
 					billdetailservice.addbilldetail(addbill, game.get());
 					//
 					game.get().getUsersActive().add(user);
+					game.get().setCountSell(game.get().getCountRate()+1);
 					gameservice.save(game.get());
 				}
 
@@ -182,7 +191,7 @@ public class CartControllerSon {
 				session.setAttribute("mycartnum", 0);
 
 
-				return "redirect:/shop";
+				return "redirect:/thank/"+bill.getIdBill();
 
 
 			
@@ -201,5 +210,13 @@ public class CartControllerSon {
 			log.error(e.getMessage());
 		}
 		return "redirect:/cart";
+	}
+	@GetMapping("thank/{bill}")
+	public String thk(Model model,@PathVariable("bill") int bill) {
+		
+		Optional<Bill> bil=billservice.findById(bill);
+		model.addAttribute("bill", bil.get());
+		return "shop/extras-invoice";
+				
 	}
 }

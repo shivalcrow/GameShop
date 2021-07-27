@@ -45,13 +45,13 @@ public class AdminGameServiceImpAn implements AdminGameServiceAn {
 		long price_fix = price - price*value/100;
 		entity.setPriceFix(price_fix);
 		if(entity.getRateGame() == null) {
-			entity.setRateGame((float) 0);
+			entity.setRateGame((float) 5);
 		}
 		if(entity.getCountSell() == null) {
 			entity.setCountSell((int) 0);
 		}
 		if(entity.getCountRate() == null) {
-			entity.setCountRate((int) 0);
+			entity.setCountRate((int) 1);
 		}
 		return game.save(entity);
 	}

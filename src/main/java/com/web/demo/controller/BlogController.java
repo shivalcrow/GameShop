@@ -4,6 +4,9 @@ package com.web.demo.controller;
  */
 
 import java.security.Principal;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,10 +30,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.demo.config.WebUtils;
 import com.web.demo.entity.Blog;
+import com.web.demo.entity.Category;
 import com.web.demo.entity.CommentBlog;
 import com.web.demo.entity.ReplyCommentBlog;
 import com.web.demo.entity.Users;
 import com.web.demo.service.BlogService;
+import com.web.demo.service.CategoryService;
 import com.web.demo.service.CommentBlogService;
 import com.web.demo.service.ReplyCommentBlogService;
 import com.web.demo.service.UserServiceImpSon;
@@ -45,6 +50,8 @@ public class BlogController {
 	UserServiceImpSon userService;
 	@Autowired
 	BlogService blogservice;
+	@Autowired
+	CategoryService cateservice;
 
 	@GetMapping("blog")
 	public String blog(Model model, String message, HttpSession session, Principal principal) {
@@ -81,7 +88,8 @@ public class BlogController {
 
 		List<Blog> listblog = blogservice.findAll();
 		model.addAttribute("listblog", listblog);
-
+		List<Category> listcate = cateservice.findAll();
+		model.addAttribute("listcate", listcate);
 		return "shop/blog-1";
 	}
 
@@ -123,11 +131,12 @@ public class BlogController {
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
-		List<CommentBlog> listcmt = commentblog.findAll();
-		model.addAttribute("listcmt", listcmt);
+		
 		Optional<Blog> bl = blogservice.findById(id);
 		if (bl.isPresent()) {
 			model.addAttribute("blogdt", bl.get());
+			List<Category> listcate = cateservice.findAll();
+			model.addAttribute("listcate", listcate);
 			return "shop/blog-detail-1";
 		} else {
 			return "shop/blog-1";
@@ -164,9 +173,11 @@ public class BlogController {
 		}else {
 			Users u = userService.findByusernameUsers(session.getAttribute("userinfoname").toString());
 			Optional<CommentBlog> b=commentblog.findById(idcmt);
+			LocalDateTime ldt = LocalDateTime.now();
+			Date date2 = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
 			if (u != null) {
 				cmb.setUser(u);
-				cmb.setDate(new Date());
+				cmb.setDate(date2);
 				cmb.setCommentBlog(b.get());
 				reply.save(cmb);
 			}

@@ -64,7 +64,7 @@ public class Games implements java.io.Serializable {
 	private Float rateGame;
 	@Column(name = "Count_sell")
 	private Integer countSell;
-	@Column(name = "Link_game", length = 150)
+	@Column(name = "Link_game")
 	private String linkGame;
 	@Column(name = "count_rate")
 	private Integer countRate;

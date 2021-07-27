@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -162,6 +163,7 @@ public class ShopControllerPhatDat {
 		if (principal != null) {
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
 			Users us = userService.findByusernameUsers(loginedUser.getUsername());
+			System.out.println(loginedUser.getAuthorities());
 			session.setAttribute("userinfoname", us.getNameUsers());
 			session.setAttribute("userinfoemail", us.getEmailUsers());
 			session.setAttribute("userinfoid", us.getIdUsers());
@@ -178,11 +180,15 @@ public class ShopControllerPhatDat {
 		Users user1 = userService.findByusernameUsers(username);
 		String cmt = comment.getContentCommentGame();
 		String rep = reply.getContentComment();
+		model.addAttribute("userDownload", null);
 		// String cmt = params.get("cmt");
 		if (user1 != null) {
-			
 			model.addAttribute("avatar", user1.getImageUsers());
 			model.addAttribute("usernameUsers", username);
+			//Download
+			Integer  UserActiveGame = gameService.getActiveGame(idGame, user1.getIdUsers());
+			model.addAttribute("userDownload", UserActiveGame);
+			
 			if (cmt == null) {
 				comment = new CommentGame();
 				model.addAttribute("comment", comment);
@@ -202,20 +208,24 @@ public class ShopControllerPhatDat {
 		} else {
 			model.addAttribute("avatar", "defaultavatar.png");
 			model.addAttribute("usernameUsers", "guest");
+			
 		}
+		
+			
+		String linkVid = gameService.getGame(idGame).getLinkVideo();
 		
 		//model.addAttribute("contentCommentGame", "");
 		comment.setContentCommentGame("");
 		model.addAttribute("game", gameService.getGame(idGame));
 		model.addAttribute("images", imageGameService.getImageDetailGame(idGame));
 		model.addAttribute("id", idGame);
-		
+		model.addAttribute("viewID", linkVid.substring(linkVid.lastIndexOf('/')+1));
 		model.addAttribute("user", new Users());
 
 		// add comment game
 		model.addAttribute("cmts", commentService.getCommentGame(idGame));
-		model.addAttribute("recGames", gameService.getRelatedGames(idGame));
-		model.addAttribute("recImgGames", imageGameService.getRelatedImageList(idGame));
+		model.addAttribute("recGames", gameService.getListRecommendGames(idGame, idGame));
+		//model.addAttribute("recImgGames", imageGameService.getListRecommendGames(idGame, idGame));
 		model.addAttribute("reps", replyCommentService.getReplyCommentGame(idGame));
 		System.out.println("-------------------\n"+replyCommentService.getReplyCommentGame(idGame).toString());
 		/**
@@ -263,7 +273,7 @@ public class ShopControllerPhatDat {
 			@PathVariable(value = "pageNo", required = false) Integer pageNo,
 			@Param("keyword") String keyword, Principal principal, 
 			@RequestParam(required = false) String message,
-			@RequestParam(value = "size", defaultValue = "4") Integer pageSize,
+			@RequestParam(value = "size", defaultValue = "12") Integer pageSize,
 			Users user, HttpSession session, HttpServletRequest request) {
 
 		// Regis
@@ -316,7 +326,7 @@ public class ShopControllerPhatDat {
 		
 		
 		String url = request.getHeader("REFERER");
-		if(url == null) {
+		if(url == null || !url.contains("shop") || url.contains("detailgame")) {
 			url = request.getRequestURL().toString();
 		}
 
@@ -657,6 +667,22 @@ public class ShopControllerPhatDat {
 		model.addAttribute("listcate", listcate);
 
 		return "shop/shop1";
+	}
+	
+	@PostMapping("/rating/{id}")
+	public String rate(@RequestParam float rate,@PathVariable("id") int id,HttpServletRequest req) {
+		String fe=req.getHeader("REFERER");
+		Optional<Games> game=gameService.findById(id);
+		float rating=(game.get().getRateGame()+rate)/(game.get().getCountRate()+1);
+		if (game.isPresent()) {
+			game.get().setRateGame(rating);
+			game.get().setCountRate(game.get().getCountRate()+1);
+			gameService.save(game.get());
+		}
+		
+		
+		return "redirect:"+fe;
+		
 	}
 
 }

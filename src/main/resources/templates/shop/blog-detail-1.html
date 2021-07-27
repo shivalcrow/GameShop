@@ -111,11 +111,7 @@
     </div>
 
     <!--market-->
-    <a href="https://themeforest.net/" class="pulse-wr">
-      <div class="popup-pulse">
-          <span>$</span>18
-      </div>
-    </a>
+    
     
     <div th:insert="fragments/frShop :: header"></div> 
     
@@ -147,7 +143,7 @@
                           </svg>
                         </div>
                         <div class="simple-text xs inline">
-                           <a href=""><p>Mickey Ronalds</p></a>
+                           <p th:text="${blogdt.users.nameUsers}"></p>
                        </div>
                       </li>
                       <li>
@@ -173,7 +169,7 @@
                         </div>
                         <div class="simple-text xs inline">
                         <a href="">
-                          <p>August 17, 2016</p>
+                          <p th:text="${#dates.format(blogdt.dateBlog, 'dd-MM-yyyy')}"></p>
                          </a>
                        </div>
                       </li>
@@ -229,7 +225,7 @@
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
         						<div class="menu-item menu-item-2 color-type-1">
-        							<img src="../img/blog/post-1.jpg" alt="" class="full-img">
+        							<img th:src="@{'/getblogimage/'+${blogdt.idBlog}}" alt="" class="full-img">
         						</div>
         					</div>
                    
@@ -247,7 +243,7 @@
   			   </article>
       			
 
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-12">
                   <h2 class="h2 caption">Related Posts</h2>
                 </div>
@@ -448,7 +444,7 @@
                    </article>
                 </div>
                 <div class="empty-md-100 empty-sm-70 empty-xs-50"></div>
-              </div>
+              </div> -->
 
 
               <div class="row">
@@ -457,16 +453,16 @@
                   <h2 class="h2 caption">Comments</h2>
                     <div class="empty-sm-50 empty-xs-30"></div>
                     <div class="comment-wrap">
-                      <ul th:each="cmt : ${listcmt}">
+                      <ul th:each="cmt : ${blogdt.commentBlogs}">
                         <li>
                           <div class="testimonials-item testi-type-4 style-2">
                            <div class="img">   
-                               <img src="img/blog/comments-1.jpg" alt="">
+                               <img th:src="@{'/getimguser/'+${cmt.users.nameUsers}}" alt=""/>
                            </div>
                            <div class="text">
                                <h5 class="h5 caption" th:text="${cmt.users.nameUsers}"></h5>
                                <div class="empty-sm-15 empty-xs-15"></div>
-                               <span class="proff" th:text="${#dates.format(cmt.date,'dd-MM-yyyy hh:mm')}"></span>
+                               <span class="proff" th:text="${#dates.format(cmt.date,'dd-MM-yyyy ')}"></span>
                                <div class="empty-sm-15 empty-xs-15"></div>
                                <div class="simple-text">
                                    <p th:utext="${cmt.contentCommentBlog}"></p>
@@ -531,12 +527,12 @@
                             <li>
                               <div class="testimonials-item testi-type-4 style-2">
                                <div class="img">   
-                                   <img src="img/blog/comments-2.jpg" alt="">
+                                   <img th:src="@{'/getimguser/'+${rep.user.nameUsers}}" alt="">
                                </div>
                                <div class="text">
                                    <h5 class="h5 caption" th:text="${rep.user.nameUsers}"></h5>
                                    <div class="empty-sm-15 empty-xs-15"></div>
-                                   <span class="proff" th:text="${#dates.format(rep.date,'dd-MM-yyyy hh:mm')}"></span>
+                                   <span class="proff" th:text="${#dates.format(rep.date,'dd-MM-yyyy' )}"></span>
                                    <div class="empty-sm-15 empty-xs-15"></div>
                                    <div class="simple-text">
                                        <p th:utext="${rep.contentComment}"></p>
@@ -574,7 +570,7 @@
 					<input type="hidden" name="idcmt" th:value="${cmt.idCommnetBlog}">
 						<div class="input-field-wrap">
 							 <textarea id="elm2"  th:field="*{contentComment}"  placeholder="Comment..." class="input-field" ></textarea>
-							<div class="focus"></div>
+							
 						</div>
 						<div class="empty-sm-30 empty-xs-20"></div>
 						<div class="text-center">
@@ -631,7 +627,7 @@
                         </div>
                       </div>
                       <div class="input-field-wrap">  
-                        <textarea id="elm1"  th:field="*{contentCommentBlog}" placeholder="Comment..." class="input-field" autofocus ></textarea>
+                        <textarea id="elm1"  th:field="*{contentCommentBlog}" placeholder="Comment..." class="input-field"  ></textarea>
                         <div class="focus"></div> 
                       </div> 
                       <div class="empty-sm-30 empty-xs-30"></div>
@@ -649,7 +645,7 @@
             </div>
 
       			<div class="col-md-3 col-xs-12">
-              <aside>
+             <!--  <aside>
                 <form action="#" class="search-form type-2">
                    <input type="text" placeholder="Search for..." class="input-search" required="">
                    <div class="submit-search">
@@ -659,8 +655,8 @@
                        </svg> 
                    </div>
                 </form>
-              </aside>
-              <aside>
+              </aside> -->
+             <!--  <aside>
                 <div class="empty-sm-65 empty-xs-30"></div>
                 <h5 class="tt h5 color-2">Categories</h5>
                 <div class="empty-sm-20 empty-xs-10"></div>
@@ -671,8 +667,8 @@
                   <li><a href="#" class="link-hover">Atmosphere<span>(9)</span></a></li>
                   <li><a href="#" class="link-hover">Upcoming Events<span>(11)</span></a></li>
                 </ul>
-              </aside>
-              <aside>
+              </aside> -->
+              <!-- <aside>
                 <div class="empty-sm-65 empty-xs-30"></div>
                 <h5 class="tt h5 color-2">Most Popular Posts</h5>
                 <div class="empty-sm-20 empty-xs-10"></div>
@@ -711,8 +707,8 @@
                       <span>April 17, 2016</span>
                   </div> 
                 </div>
-              </aside>
-              <aside>
+              </aside> -->
+              <!-- <aside>
                 <div class="empty-sm-65 empty-xs-30"></div>
                 <h5 class="tt h5 color-2">lates tweets</h5>
                 <div class="empty-sm-20 empty-xs-10"></div>
@@ -766,13 +762,13 @@
                   </div>
                 </form>
                 <div class="empty-sm-70 empty-xs-30"></div>
-              </aside>
+              </aside> -->
       			</div>
   		</div>
   		</div>
   	</section>
 	
-    	<section>
+    	<!-- <section>
     		<div class="container">
     			<div class="row">
               <div class="col-md-6 col-xs-12">
@@ -981,7 +977,7 @@
     			</div>
     		</div>
           <div class="empty-lg-140 empty-md-100 empty-sm-70 empty-xs-60"></div>
-        </section>
+        </section> -->
 </div>
          
 <div th:insert="fragments/frShop :: footer"></div>

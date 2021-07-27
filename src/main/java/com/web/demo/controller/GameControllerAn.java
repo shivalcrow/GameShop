@@ -5,6 +5,8 @@ package com.web.demo.controller;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -89,20 +91,23 @@ public class GameControllerAn {
 	@RequestMapping(value = "/savegame", method = RequestMethod.POST)
 	public String savegame(@ModelAttribute("game") Games game, @RequestParam("files[]") MultipartFile[] images,
 			 Model model ) {
-		Games g = gameService.save(game);
-		try {
-			Arrays.asList(images).stream().forEach(image -> {
-				imageService.store(image);
-				String file=StringUtils.cleanPath(image.getOriginalFilename());
-				ImageData imagedata=new ImageData();
-				imagedata.setGames(g);
-				imagedata.setNameImage(file);
-				imageService.save(imagedata);	
-			});
-		}catch(Exception e) {
-			System.out.println("Empty file name !!!");
-		}
-		return "redirect:/admin/listgame";
+			Games g = gameService.save(game);
+			try {
+				Arrays.asList(images).stream().forEach(image -> {
+					if(image.getOriginalFilename() != null && !image.getOriginalFilename().isEmpty()) {
+						ImageData imagedata=new ImageData();
+						imageService.store(image);
+						String file=StringUtils.cleanPath(image.getOriginalFilename());
+						imagedata.setGames(g);
+						imagedata.setNameImage(file);
+						imageService.save(imagedata);
+				}
+			});	
+			}catch(Exception e) {
+				System.out.println("Empty file name !!!");
+				return "403";
+			}
+				return "redirect:/admin/listgame";
 	}
 	@GetMapping("admin/listgame")
 	public String listgame(Model model, Principal principal) {

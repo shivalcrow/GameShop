@@ -1,9 +1,16 @@
 package com.web.demo.controller;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +19,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.web.demo.config.WebUtils;
 import com.web.demo.entity.Category;
 import com.web.demo.entity.Games;
 import com.web.demo.entity.SlideShow;
 import com.web.demo.entity.Systems;
+import com.web.demo.entity.Users;
 import com.web.demo.service.CategoryService;
 import com.web.demo.service.DiscountServicePD;
 import com.web.demo.service.GamesServicePD;
 import com.web.demo.service.ImageDataServicePD;
 import com.web.demo.service.SlideShowService;
 import com.web.demo.service.SystemsService;
+import com.web.demo.service.UserServiceSon;
 
 /**
  * @author PhatDat
@@ -39,6 +49,8 @@ public class HomeController {
 	@Autowired
 	private GamesServicePD gameService;
 	
+	@Autowired
+	UserServiceSon userService;
 	@Autowired
 	CategoryService cateService;
 	
@@ -152,6 +164,44 @@ public class HomeController {
 //        return "index";
 //    }
 	
+@GetMapping("/userinfo")
+public String userinfo(Model model,@RequestParam(required = false) String message,
+		HttpServletRequest request, Principal principal,
+		Users user, HttpSession session) {
+	model.addAttribute("user", user);
 
+	//
+	if (message != null && !message.isEmpty()) {
+		if (message.equals("logout")) {
+			model.addAttribute("message", "Logout!");
+			session.removeAttribute("userinfoname");
+			session.removeAttribute("userinfoemail");
+			session.removeAttribute("userinfoid");
+			session.removeAttribute("userinfophone");
+		}
+		if (message.equals("error")) {
+			model.addAttribute("message", "Login Failed!");
+			
+		}
+		if (message.equals("loginreq")) {
+			model.addAttribute("message", "Please Login");
+		}
+
+	}
+//	System.out.println(message);
+	if (principal != null) {
+		User loginedUser = (User) ((Authentication) principal).getPrincipal();
+		Users us = userService.findByusernameUsers(loginedUser.getUsername());
+		session.setAttribute("userinfoname", us.getNameUsers());
+		session.setAttribute("userinfoemail", us.getEmailUsers());
+		session.setAttribute("userinfoid", us.getIdUsers());
+		session.setAttribute("userinfophone", us.getPhoneUsers());
+		System.out.println(session.getAttribute("userinfoname") + "a" + session.getAttribute("userinfoemail"));
+		String userInfo = WebUtils.toString(loginedUser);
+		model.addAttribute("userInfo", userInfo);
+	}
+	return "shop/maintenance";
+	
+}
 	
 }

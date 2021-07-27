@@ -36,10 +36,10 @@ public class GamesDtoAn {
 	private String vga;
 	private Set<ImageDataDtoAn> imageDatas = new HashSet<ImageDataDtoAn>(0);
 	private Set<CategoryDtoAn> categories = new HashSet<CategoryDtoAn>(0);
-	private Set<Users> UsersActive = new HashSet<Users>(0);
-	private Set<CommentGame> commentGames = new HashSet<CommentGame>(0);
-	private Set<BillDetail> billDetails = new HashSet<BillDetail>(0);
-	private Set<SlideShow> slideShows = new HashSet<SlideShow>(0);
+//	private Set<Users> UsersActive = new HashSet<Users>(0);
+//	private Set<CommentGame> commentGames = new HashSet<CommentGame>(0);
+//	private Set<BillDetail> billDetails = new HashSet<BillDetail>(0);
+//	private Set<SlideShow> slideShows = new HashSet<SlideShow>(0);
 	public Integer getIdGame() {
 		return idGame;
 	}
@@ -161,29 +161,29 @@ public class GamesDtoAn {
 	public void setCategories(Set<CategoryDtoAn> categories) {
 		this.categories = categories;
 	}
-	public Set<Users> getUsersActive() {
-		return UsersActive;
-	}
-
-	public void setUsersActive(Set<Users> usersActive) {
-		UsersActive = usersActive;
-	}
-	public Set<CommentGame> getCommentGames() {
-		return commentGames;
-	}
-	public void setCommentGames(Set<CommentGame> commentGames) {
-		this.commentGames = commentGames;
-	}
-	public Set<BillDetail> getBillDetails() {
-		return billDetails;
-	}
-	public void setBillDetails(Set<BillDetail> billDetails) {
-		this.billDetails = billDetails;
-	}
-	public Set<SlideShow> getSlideShows() {
-		return slideShows;
-	}
-	public void setSlideShows(Set<SlideShow> slideShows) {
-		this.slideShows = slideShows;
-	}
+//	public Set<Users> getUsersActive() {
+//		return UsersActive;
+//	}
+//
+//	public void setUsersActive(Set<Users> usersActive) {
+//		UsersActive = usersActive;
+//	}
+////	public Set<CommentGame> getCommentGames() {
+//		return commentGames;
+//	}
+//	public void setCommentGames(Set<CommentGame> commentGames) {
+//		this.commentGames = commentGames;
+//	}
+//	public Set<BillDetail> getBillDetails() {
+//		return billDetails;
+//	}
+//	public void setBillDetails(Set<BillDetail> billDetails) {
+//		this.billDetails = billDetails;
+//	}
+//	public Set<SlideShow> getSlideShows() {
+//		return slideShows;
+//	}
+//	public void setSlideShows(Set<SlideShow> slideShows) {
+//		this.slideShows = slideShows;
+//	}
 }

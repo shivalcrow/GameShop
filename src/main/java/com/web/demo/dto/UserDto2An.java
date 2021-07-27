@@ -26,12 +26,12 @@ public class UserDto2An {
 	private Date dateOfBirthday;
 	private Integer gender;
 	private Integer status;
-	private Set<TokenUser> tokenUsers = new HashSet<TokenUser>(0);
-	private Set<Bill> bills = new HashSet<Bill>(0);
-	private Set<Blog> blogs = new HashSet<Blog>(0);
-	private Set<CommentBlog> commentBlogs = new HashSet<CommentBlog>(0);
-	private Set<CommentGame> commentGames = new HashSet<CommentGame>(0);
-	private Set<Games> GamesActive = new HashSet<Games>(0);
+//	private Set<TokenUser> tokenUsers = new HashSet<TokenUser>(0);
+//	private Set<Bill> bills = new HashSet<Bill>(0);
+//	private Set<Blog> blogs = new HashSet<Blog>(0);
+//	private Set<CommentBlog> commentBlogs = new HashSet<CommentBlog>(0);
+//	private Set<CommentGame> commentGames = new HashSet<CommentGame>(0);
+//	private Set<Games> GamesActive = new HashSet<Games>(0);
 	public Integer getIdUsers() {
 		return idUsers;
 	}
@@ -98,41 +98,41 @@ public class UserDto2An {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public Set<TokenUser> getTokenUsers() {
-		return tokenUsers;
-	}
-	public void setTokenUsers(Set<TokenUser> tokenUsers) {
-		this.tokenUsers = tokenUsers;
-	}
-	public Set<Bill> getBills() {
-		return bills;
-	}
-	public void setBills(Set<Bill> bills) {
-		this.bills = bills;
-	}
-	public Set<Blog> getBlogs() {
-		return blogs;
-	}
-	public void setBlogs(Set<Blog> blogs) {
-		this.blogs = blogs;
-	}
-	public Set<CommentBlog> getCommentBlogs() {
-		return commentBlogs;
-	}
-	public void setCommentBlogs(Set<CommentBlog> commentBlogs) {
-		this.commentBlogs = commentBlogs;
-	}
-	public Set<CommentGame> getCommentGames() {
-		return commentGames;
-	}
-	public void setCommentGames(Set<CommentGame> commentGames) {
-		this.commentGames = commentGames;
-	}
+//	public Set<TokenUser> getTokenUsers() {
+//		return tokenUsers;
+//	}
+//	public void setTokenUsers(Set<TokenUser> tokenUsers) {
+//		this.tokenUsers = tokenUsers;
+//	}
+//	public Set<Bill> getBills() {
+//		return bills;
+//	}
+//	public void setBills(Set<Bill> bills) {
+//		this.bills = bills;
+//	}
+//	public Set<Blog> getBlogs() {
+//		return blogs;
+//	}
+//	public void setBlogs(Set<Blog> blogs) {
+//		this.blogs = blogs;
+//	}
+//	public Set<CommentBlog> getCommentBlogs() {
+//		return commentBlogs;
+//	}
+//	public void setCommentBlogs(Set<CommentBlog> commentBlogs) {
+//		this.commentBlogs = commentBlogs;
+//	}
+//	public Set<CommentGame> getCommentGames() {
+//		return commentGames;
+//	}
+//	public void setCommentGames(Set<CommentGame> commentGames) {
+//		this.commentGames = commentGames;
+//	}
 	
-	public Set<Games> getGamesActive() {
-		return GamesActive;
-	}
-	public void setGamesActive(Set<Games> gamesActive) {
-		GamesActive = gamesActive;
-	}
+//	public Set<Games> getGamesActive() {
+//		return GamesActive;
+//	}
+//	public void setGamesActive(Set<Games> gamesActive) {
+//		GamesActive = gamesActive;
+//	}
 }

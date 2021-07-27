@@ -197,13 +197,19 @@ public class AdminControllerAn {
 	//Users
 	@GetMapping("admin/listusers")
 	public String userlist(Model model, Principal principal) {
-		System.out.println("Admin/listuser");
+		User loginedUser = null;
 		if (principal != null) {
-			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+			loginedUser = (User) ((Authentication) principal).getPrincipal();
 			String userInfo = WebUtilsAn.toStringManager(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
-		return "admin/listuser";
+		if(loginedUser.getAuthorities().toString().equals("[ROLE_ADMIN]")) {
+			System.out.println(loginedUser.getAuthorities().toString());
+			return "admin/listuser";
+		}else {
+			System.out.println(loginedUser.getAuthorities());
+			return "403";
+		}
 	}
 	@GetMapping("admin/listcustomers")
 	public String listcustomer(Model model, Principal principal) {

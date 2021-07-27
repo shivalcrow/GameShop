@@ -40,7 +40,7 @@ public class Blog implements java.io.Serializable {
 	@Column(name = "Content_blog", length = 65535)
 	private String contentBlog;
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd ")
 	@Column(name = "Date_blog", length = 10)
 	private Date dateBlog;
 	@Column(name = "Image_blog", nullable = false, length = 45)

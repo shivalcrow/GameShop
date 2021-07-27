@@ -121,9 +121,10 @@
             }
         }
     </style>
+	
 </head>
 
-<body class="page-color-style-1 page-style-1">
+<body class="page-color-style-1 page-style-1" >
 
     <div class="preloader">
         <div class="sk-cube-grid selected">
@@ -219,16 +220,11 @@
     </div>
 
     <!--market-->
-    <a href="https://themeforest.net/" class="pulse-wr">
-        <div class="popup-pulse">
-            <span>$</span>18
-        </div>
-    </a>
+   
 
     <header class="header header-style-1">
         <div class="navigation flex-align">
-            <a th:href="@{/}" class="logo"><img src="img/logo.png" alt="delice"><img src="img/logo2.png"
-                    alt="delice" class="logo-type-2"></a>
+            <a  class="logo"><img src="img/final1.png" alt="megalodon" height="40%" width="30%"> </a>
             <div class="burger-menu"><i></i></div>
             <div class="nav">
                 <div class="nav-align-wrap">
@@ -249,7 +245,7 @@
 
                             </li>
 
-                            <li><a href="#">Blog<img src="img/down-arrow.png" alt="" class="menu-arr"></a>
+                            <li><a th:href="@{/blog}">Blog<img src="img/down-arrow.png" alt="" class="menu-arr"></a>
                             </li>
                             
                         </ul>
@@ -268,7 +264,7 @@
                    
                     <th:block th:each="slide :${slider}">
                     <div class="swiper-slide">
-                        <div class="parallax-bg layer bg"
+                        <div class="parallax-bg layer bg" id="img1"
 							th:style="'background: url(' + @{ '/getimage/'+${slide.idSlideShow}}+ ');
 							background-repeat: no-repeat;background-size: cover;'"
 							data-swiper-parallax="50%">
@@ -290,7 +286,7 @@
                                         </div>
                                         <div class="empty-sm-45  empty-xs-45"></div>
                                         <div class="button-wrap">
-                                            <a th:href="@{/shop/1}" class="page-button button-style-1"><span class="txt">Buy now</span></a>
+                                            <a th:href="@{'/shop/detailgame?id=' + ${slide.games.idGame}}" class="page-button button-style-1"><span class="txt">Buy now</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -312,7 +308,7 @@
                         <div class="simple-item-style-2 simple-item">
                             <span class="page-span-1 page-span"></span>
                             <span class="page-span-2 page-span type-2"></span>
-                            <img src="img/home-1/about_home_1_img_1.jpg" alt="" class="resp-img">
+                            <img src="img/home-1/bannerab2.jpg" alt="" class="resp-img">
                         </div>
                         <div class="empty-lg-0 empty-md-0 empty-sm-60 empty-xs-40"></div>
                     </div>
@@ -321,17 +317,13 @@
                             <h2 class="h1 title main-col">About Us</h2>
                             <div class="empty-sm-10 empty-xs-10"></div>
                             <div class="simple-text md simple-sub-text">
-                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                    fugiat nulla pariatur.</p>
+                                <p>We are small fish, expanding every day.</p>
                             </div>
                             <div class="empty-sm-35 empty-xs-25"></div>
                             <div class="simple-text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse dolore eu fugiat nulla
-                                    pariatur. Sint occaecat cupidatat non proident, culpa qui officia deserunt mollit
-                                    anim id est laborum ullamco. </p>
+                                <p>
+
+Fun games or games you've always been looking for. We understand how difficult this is – that's why we're here to help.A lot of products and services are trying to grab your attention more strongly than other products and services.Wouldn't it be great to have a trusted friend by your side to help you through this process with independent, professional reviews and help you avoid any pitfalls?Megalondon Shop website is the right choice when you want to have information about informative games and popular favorite games even if you want to find reliable services, you can also use the service. Great service looking for a new sample game.</p>
                             </div>
                             <div class="empty-sm-45 empty-xs-35"></div>
                             <a href="#" class="page-button button-style-2"><span class="bg"
@@ -343,17 +335,18 @@
                         <div class="simple-item-style-2 simple-item">
                             <span class="page-span-1 page-span type-2"></span>
                             <span class="page-span-2 page-span"></span>
-                            <img src="img/home-1/about_home_1_img_2.jpg" alt="" class="resp-img">
+                            <img src="img/home-1/bannerab.jpg" alt="" class="resp-img">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="empty-lg-140 empty-md-100 empty-sm-90 empty-xs-60"></div>
         </section>
-
-        <section class="section">
+		
+        <section class="section" onload = "startTimer()">
+			
             <div class="empty-lg-170 empty-md-70 empty-sm-50 empty-xs-20"></div>
-            <div class="bg layer ready data-jarallax" data-jarallax="5"
+            <div class="bg layer ready data-jarallax" data-jarallax="5" id="image-head"
                 style="background-image: url(../img/game/slider4.jpg)"></div>
             <div class="container item-animation scroll-type-1">
                 <div class="simple-item text-center color-type-1 simple-item-style-1">
@@ -374,7 +367,9 @@
                 </div>
             </div>
             <div class="empty-lg-200 empty-md-100 empty-sm-90 empty-xs-60"></div>
+			
         </section>
+
 
         <section class="section">
             <div class="empty-lg-140 empty-md-100 empty-sm-90 empty-xs-60"></div>
@@ -391,15 +386,16 @@
             </div>
             <div class="custome-container">
                 <div class="row item-animation scroll-type-1">
-                    <div class="col-md-3 col-sm-6 col-xs-12" th:each="game : ${games_topSelling}">
+                <th:block th:each="game : ${games_topSelling}">
+                    <div class="col-md-3 col-sm-6 col-xs-12" >
 					
-                        <div class="menu-item menu-item-1">
-                            <div class="image" th:each="img : ${images2}">
+                        <div class="menu-item menu-item-1" >
+                            <div class="image" >
                                 <span class="page-span-1 page-span"></span>
                                 <span class="page-span-2 page-span type-2"></span>
-								<div th:if="${game.idGame == img.games.idGame}">
-									<img th:src="@{'/getgameimage/'+${img.idImage}}" alt="">
-								</div>
+								
+									<img th:src="@{'/getgameimage/'+${game.imageDatas[0].idImage}}" class="img-responsive">
+								
                                 <div class="vertical-align full menu-button">
                                     <a th:href="@{'/shop/detailgame?id=' + ${game.idGame}}" 
 									class="page-button button-style-1"><span class="txt">view
@@ -407,17 +403,16 @@
                                 </div>
                             </div>
                             <div class="text">
+                                <div class="empty-sm-50 empty-xs-50"></div>
+                                <h4 class="h4 caption" align><a th:href="@{'/shop/detailgame?id=' + ${game.idGame}}" class="link-hover-line" th:text="${game.nameGame}"></a></h4>
                                 <div class="empty-sm-20 empty-xs-20"></div>
-                                <h4 class="h4 caption" align><a href="#" class="link-hover-line" th:text="${game.nameGame}"></a></h4>
-                                <div class="empty-sm-10 empty-xs-10"></div>
-								<div class="cat" ><p th:text="${game.discount.Value}"></p><s th:text="${game.priceFix}"></s><p th:text="${game.price}"></p></div>
 								
-
+								<div class="empty-sm-40 empty-xs-40"></div>
                             </div>
                         </div>
                         <div class="empty-sm-30 empty-xs-30"></div>
                     </div>
-
+</th:block>
                     <div class="text-center">
                         <div class="empty-sm-20 empty-xs-20"></div>
                         <a th:href="@{/shop/games/bestSelling/1}" class="page-button button-style-2"><span class="bg"
@@ -441,11 +436,12 @@
                     <div class="wrap-padding">
                         <h2 class="simple-sub-text main-col h1" th:text="${games_New.nameGame}"></h2>
                         <div class="empty-sm-10 empty-xs-10"></div>
-                        <div class="simple-text md simple-sub-text">
+                        <div style="font-size:30px;color:white;">
                             <p>Price:</p>
-                                <p style="display: inline-block;" th:text="${'- ' + games_New.discount.value + ' %'}"></p>
-								<p style="display: inline-block; margin-left: 20px;" th:text="${games_New.priceFix + ' VND'}"></p>
-								<p style="display: inline-block; margin-left: 20px;" ><strike th:text="${games_New.price + ' VND'}"></strike></p>
+                                <p th:if="${games_New.discount.value != 0} or ${games_New.discount.value != 100}" style="display: inline-block;" th:text="${'-' + games_New.discount.value + '%'}"></p>
+								<p th:unless="${games_New.discount.value != 100}" style="display: inline-block;" >Free</p>
+								<p th:if="${games_New.discount.value != 100}" style="display: inline-block; margin-left: 20px;" th:text="${'$' + games_New.priceFix}"></p>
+								<p th:if="${games_New.discount.value != 100} or ${games_New.discount.value != 0}" style="display: inline-block; margin-left: 20px;" ><strike th:text="${'$' + games_New.price}"></strike></p>
                         </div>
                     </div>
                     <div class="empty-sm-40  empty-xs-40"></div>
@@ -475,11 +471,13 @@
                                 <p></p>
                             </div>
                             <div class="empty-sm-20 empty-xs-20"></div>
-                            <div class="simple-text">
+                            <div style="font-size:20px;">
 								<p>Price:</p>
-                                <p style="display: inline-block;" th:text="${'- ' + games_Recommended.discount.value + ' %'}"></p>
-								<p style="display: inline-block; margin-left: 20px;" th:text="${games_Recommended.priceFix + ' VND'}"></p>
-								<p style="display: inline-block; margin-left: 20px;" ><strike th:text="${games_Recommended.price + ' VND'}"></strike></p>
+								<div class="empty-sm-10 empty-xs-10"></div>
+                                <p th:if="${games_Recommended.discount.value != 0} or ${games_Recommended.discount.value != 100}" style="display: inline-block;font-size:40px;color:#ed6c39;" th:text="${'-' + games_Recommended.discount.value + '%'}"></p>
+								<p th:unless="${games_Recommended.discount.value != 100}" style="display: inline-block;font-size:40px;color:#ed6c39;" >Free</p>
+								<p th:if="${games_Recommended.discount.value != 100}" style="display: inline-block; margin-left: 20px;font-size:30px;color:#6bb37e;" th:text="${'$' + games_Recommended.priceFix}"></p>
+								<p th:if="${games_Recommended.discount.value != 100} or ${games_Recommended.discount.value != 0}" style="display: inline-block; margin-left: 20px;" ><strike th:text="${'$' + games_Recommended.price}"></strike></p>
                             </div>
                             <div class="empty-sm-45  empty-xs-45"></div>
                             <a th:href="@{'/shop/detailgame?id=' + ${games_Recommended.idGame}}" 
@@ -498,7 +496,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="simple-item-style-2 simple-item">
                                     <span class="page-span-3 page-span"></span>
-                                    <img th:src="@{'/getgameimage/'+${img3.idImage}}" alt="" class="resp-img">
+                                    <img th:src="@{'/getgameimage/'+${img3.idImage}}" alt="" class="resp-img" style="height:150px;">
                                 </div>
                                 <div class="empty-sm-30 empty-xs-30"></div>
                             </div>
@@ -519,11 +517,11 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-sm-12">
                     <div class="footer-item">
-                        <img src="img/logo.png" alt="">
+                   
+                        <img src="img/final1.png" height="40%" width="60%" alt="">
                         <div class="empty-sm-15 empty-xs-15"></div>
                         <div class="simple-text">
-                            <p>Ut enim ad minim veniam, quis nostrud at exercitation ullamco laboris nisi nemo sit enim
-                                ipsam voluptatem quia voluptas</p>
+                            <p>Play together, enjoy together, have fun together, that's the moment of life."‎ Live in your world, play in ours "‎. That is our concern for you.</p>
                         </div>
                         <div class="empty-sm-20 empty-xs-20"></div>
                         <div class="follow follow-style-2 sm">
@@ -637,9 +635,9 @@
                         <h5 class="h5">Contact Us</h5>
                         <div class="empty-sm-15 empty-xs-15"></div>
                         <ul class="list-style-2 ul-list">
-                            <li>150 Duffy Ave, Hicksville, NY 11801, USA</li>
-                            <li><a href="tel:" class="link-hover">+38 056 23 15 7851</a></li>
-                            <li><a href="mailto:" class="link-hover">delice.info@mail.com</a></li>
+                            <li>89 Tran Van Du, Tan Binh District, HCM City</li>
+                            <li><a href="tel:" class="link-hover">+84 28 3520 8135</a></li>
+                            <li><a href="mailto:" class="link-hover">sonnh1404.98@gmail.com</a></li>
                         </ul>
                     </div>
                     <div class="empty-sm-30 empty-xs-30"></div>
@@ -683,7 +681,30 @@
             });
             return false;
         }
+		
     </script>
+	
+	<script type="text/javascript">
+        function startTimer() {
+			  var i = 0;
+			  var images = [
+				  "../img/game/slider1.jpg",
+				  "../img/game/slider2.jpg",
+				  "../img/game/slider3.jpg",
+				  "../img/game/slider4.jpg"
+				]
+
+              setInterval(function() {
+					document.getElementById("image-head").style.backgroundImage = "url(" + images[i] + ")";
+					  i = i + 1;
+					  if (i == images.length) {
+						i =  0;
+					  }
+				  }, 3000);
+			  }
+      </script>
+	
+	
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>

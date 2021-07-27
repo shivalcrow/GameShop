@@ -52,15 +52,7 @@
                         <div class="page-title-box">
                             <div class="btn-group pull-right">
                                 <ol class="breadcrumb hide-phone p-0 m-0">
-                                    <li>
-                                        <a href="#">Zircos</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Real Estate</a>
-                                    </li>
-                                    <li class="active">
-                                        Agent Profile
-                                    </li>
+                                    
                                 </ol>
                             </div>
                             <h4 class="page-title">Your Profile</h4>
@@ -236,12 +228,12 @@
                 <form method="Post" th:action="@{/savepassword}">
                    <div class="form-group">
                       <label for="userName">Your Old Password<span class="text-danger">*</span></label>
-                      <input type="text" name="oldpass" parsley-trigger="change" required
+                      <input type="password" name="oldpass" parsley-trigger="change" required
                           placeholder="Enter Old Password" class="form-control" id="userName">
                    </div>
                    <div class="form-group">
                       <label for="userName">New Password<span class="text-danger">*</span></label>
-                      <input type="text" name="newpasswordUsers" parsley-trigger="change" required
+                      <input type="password" name="newpasswordUsers" parsley-trigger="change" required
                           placeholder="Enter New Password" class="form-control" id="userName"
                           >
                    </div>

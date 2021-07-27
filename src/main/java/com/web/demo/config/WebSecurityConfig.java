@@ -48,11 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		http
-				.authorizeRequests()
-				.antMatchers("/admin/").access("hasRole('ADMIN') or hasRole('EMPLOYEE') ");
-		http.authorizeRequests().antMatchers("/admin/listcustomers").access("hasRole('EMPLOYEE')");
-		http.authorizeRequests().antMatchers("/admin/listusers").access("hasRole('ADMIN')");
+		http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('EMPLOYEE')");
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 		http.authorizeRequests().and()
 				.formLogin().successHandler(customizeAuthenticationSuccessHandler)

@@ -12,5 +12,6 @@ public interface ImageDataServicePD {
 	public ImageData getImageGame(int i);
 	public List<ImageData> getImageDetailGame(int i);
 	public List<ImageData> getImageList();
-	public List<ImageData> getRelatedImageList(int i);
+	public List<ImageData> getRelatedImageList(int i1, int i2);
+	
 }

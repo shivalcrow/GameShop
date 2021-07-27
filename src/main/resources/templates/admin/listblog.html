@@ -53,15 +53,7 @@
                     <div class="page-title-box">
                         <div class="btn-group pull-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li>
-                                    <a href="#">Zircos</a>
-                                </li>
-                                <li>
-                                    <a href="#">Dashboard</a>
-                                </li>
-                                <li class="active">
-                                    Dashboard
-                                </li>
+                                
                             </ol>
                         </div>
                         <h4 class="page-title">Dashboard</h4>
@@ -146,7 +138,6 @@
                                             <tr>
                                                 <th>Title blog</th>
                                                 <th>Author</th>
-                                                <th>Content</th>
                                                 <th>Write Date</th>
                                                 <th>Views</th>
                                                 <th>Actions</th>
@@ -156,7 +147,6 @@
                                             <tr class="gradeC" th:each="blog : ${blogs}">
                                                 <td th:text="${blog.titleBlog}"></td>
                                                 <td th:text="${blog.users.usernameUsers}"></td>
-                                                <td th:utext="${blog.contentBlog}"></td>
                                                 <td th:text="${blog.dateBlog}"></td>
                                                 <td th:text="${blog.viewBlog}"></td>
                                                 <td class="actions">

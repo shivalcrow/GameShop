@@ -1,6 +1,7 @@
 package com.web.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,12 +11,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.web.demo.entity.Games;
+import com.web.demo.entity.Users;
 import com.web.demo.repository.GamesRepositoryPD;
 /*
  * @author PhatDat
  */
 @Service
 public class GamesServiceImpPD implements GamesServicePD {
+	@Override
+	public <S extends Games> S save(S entity) {
+		return gamesRepository.save(entity);
+	}
+
+	@Override
+	public Optional<Games> findById(Integer id) {
+		return gamesRepository.findById(id);
+	}
+
 	@Autowired
 	private GamesRepositoryPD gamesRepository;
 	
@@ -120,6 +132,16 @@ public class GamesServiceImpPD implements GamesServicePD {
 	public Page<Games> findGamesByCategoryPaginated(int pageNo, int pageSize, int idCate) {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 		return this.gamesRepository.findGamesByCateGoryPaginated(idCate, pageable);
+	}
+
+	@Override
+	public List<Games> getListRecommendGames(int id1, int id2) {	
+		return this.gamesRepository.findRecommendGames(id1, id2);
+	}
+
+	@Override
+	public Integer getActiveGame(int idGame, int idUser) {
+		return this.gamesRepository.findActiveGame(idGame, idUser);
 	}
 
 }

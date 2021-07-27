@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.demo.converter.UsersConverterAn;
+import com.web.demo.dto.UsersDtoAn;
 import com.web.demo.entity.TokenUser;
 import com.web.demo.entity.Users;
 import com.web.demo.service.AdminUserServiceAn;
@@ -37,9 +39,9 @@ public class RestUserControllerAn {
 		System.out.println("/api/user");
 		List<Users> list=userService.findAll();
 		
-//		List<UsersDto> listDto = UserConverter.getInstance().touserDtoList(list);
+		List<UsersDtoAn> listDto = UsersConverterAn.getInstance().touserDtoList(list);
 		
-		return ResponseEntity.ok(list);
+		return ResponseEntity.ok(listDto);
 	}
 	@PostMapping("/api/adduser")
 	public  ResponseEntity<Users> adduser(@RequestBody Users users){	

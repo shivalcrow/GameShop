@@ -67,7 +67,8 @@ public String error() {
 	@PostMapping("/regis")
 	public String savecustomer(@Validated @ModelAttribute("user") Users user, ModelMap model,
 			@RequestParam(required = false) String pre_password) {
-
+		int pageNo=1;
+		model.addAttribute("pageNo", pageNo);
 	
 
 		Optional<Users> userbyusername = userservice.findByUsernameUsers(user.getUsernameUsers());
@@ -75,15 +76,15 @@ public String error() {
 
 		if (userbyusername.isPresent()) {
 			model.addAttribute("message2", "Username already exists");
-			return "shop/shop-3";
+			return "shop/shop1";
 		}
 		if (userbyemail.isPresent()) {
 			model.addAttribute("message2", "Email already exists");
-			return "shop/shop-3";
+			return "shop/shop1";
 		}
 		if (!pre_password.equalsIgnoreCase(user.getPasswordUsers())) {
 			model.addAttribute("message2", "Password not match");
-			return "shop/shop-3";
+			return "shop/shop1";
 		} else {
 			int roles = 3;
 			Users us = userservice.addUser(user, roles);
@@ -97,16 +98,17 @@ public String error() {
 	@PostMapping("/forgot")
 	public String forgot(Model model, @ModelAttribute("user") Users user) {
 		Optional<Users> userbyemail = userservice.findByEmailUsers(user.getEmailUsers());
-
+		int pageNo=1;
+		model.addAttribute("pageNo", pageNo);
 		if (userbyemail.isPresent()) {
 			Users us= userservice.confirmEmail(user, userbyemail);
 			model.addAttribute("message3", "Please check your email");
 			model.addAttribute("user", us);
-			return "shop/shop-3";
+			return "shop/shop1";
 		} else {
 			model.addAttribute("message3", "Email not exist");
 			model.addAttribute("user", user);
-			return "shop/shop-3";
+			return "shop/shop1";
 
 		}
 

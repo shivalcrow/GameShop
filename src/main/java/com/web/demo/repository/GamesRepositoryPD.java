@@ -10,6 +10,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.web.demo.entity.Games;
+import com.web.demo.entity.ImageData;
+import com.web.demo.entity.Users;
 
 @Repository
 public interface GamesRepositoryPD extends JpaRepository<Games, Integer>, PagingAndSortingRepository<Games, Integer> {
@@ -89,6 +91,25 @@ public interface GamesRepositoryPD extends JpaRepository<Games, Integer>, Paging
 			nativeQuery = true)
 	Page<Games> findGamesByCateGoryPaginated(int idCate, Pageable pageable);
 	
+	/*
+	 * @author PhatDat
+	 * method get related games in detail game
+	 */
+	@Query(value = "SELECT * FROM games WHERE Id_game IN"
+			+ " (SELECT Id_game FROM game_category WHERE NOT Id_game = ?1 AND Id_category IN"
+			+ " (SELECT Id_category FROM game_category WHERE Id_game = ?2)) LIMIT 5",
+			nativeQuery = true)
+	List<Games> findRecommendGames(int idGame1, int idGame2);
+	
+	
+	/*
+	 * @author PhatDat
+	 * method get related games in detail game
+	 */
+	@Query(value = "SELECT u.Id_users FROM users u INNER JOIN active_game ag ON "
+			+ "u.Id_users = ag.Id_users WHERE ag.Id_game = ?1 AND u.Id_users = ?2",
+			nativeQuery = true)
+	Integer findActiveGame(int idGame, int idUser);
 
 	
 }
